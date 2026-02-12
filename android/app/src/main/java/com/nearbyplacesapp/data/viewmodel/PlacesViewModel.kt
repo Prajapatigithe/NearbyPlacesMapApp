@@ -60,10 +60,10 @@ class PlacesViewModel(private val repository: LocationRepository) : ViewModel() 
                 is UserLocationResult.Error -> {
                     
                     val errorCode = when {
-                        locationResult.message.contains("LOCATION_UNAVAILABLE") 
-                        locationResult.message.contains("null")                 
-                        locationResult.message.contains("unavailable")          
-                        locationResult.message.contains("timed out")           
+                        locationResult.message.contains("LOCATION_UNAVAILABLE")-> "LOCATION_UNAVAILABLE" 
+                        locationResult.message.contains("null") -> "NULL_LOCATION"                
+                        locationResult.message.contains("unavailable") -> "LOCATION_UNAVAILABLE"         
+                        locationResult.message.contains("timed out")  -> "LOCATION_TIMEOUT"        
                         else -> locationResult.message
                     }
                     _state.value = _state.value.copy(
